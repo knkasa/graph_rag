@@ -5,39 +5,40 @@
 import boto3
 import json
 
-# You'll need AmazonBedrockfullAccess permission for the IAM user.
+# You'll need AmazonBedrockfullAccess policy for the IAM user.
 session = boto3.Session(
-        aws_access_key_id='xxxxx',
-        aws_secret_access_key='yyyyyy',
-        region_name='ap-northeast-1'
+        aws_access_key_id='',
+        aws_secret_access_key='',
+        #region_name='ap-northeast-1'
     ) 
 
-client = session.client('bedrock-runtime', region_name='ap-northeast-1')
+bedrock_client = session.client('bedrock-runtime', region_name='us-east-1')
 
+system_prompt = "日本語はわかりますか？"
 
-text = "こんにちは"
-
-# Anthropic社のClaudeモデルのプロンプトフォーマットを参照： https://docs.anthropic.com/claude/docs/introduction-to-prompt-design#human--assistant-formatting
-prompt = f"\n\nHuman: {text}\n\nAssistant:"
-
-body = json.dumps(
-        {
-        "prompt": prompt,
-        "max_tokens_to_sample": 500,
+payload = {
+            "anthropic_version": "bedrock-2023-05-31",
+            "temperature": 0.5,
+            "max_tokens": 5000,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": system_prompt
+                        }
+                    ]
+                }
+            ]
         }
-    )
 
-resp = client.invoke_model(
-        modelId="anthropic.claude-v2:1",  # you can lookup from clicking "Base models" in Bedrock webpage.
-        body=body,
+response_raw = bedrock_client.invoke_model(
+        modelId="anthropic.claude-3-haiku-20240307-v1:0",
+        body=json.dumps(payload),
         contentType="application/json",
         accept="application/json",
     )
-    
-#print(resp)
-answer = resp["body"].read().decode()
 
-#print(answer)
-print(json.loads(answer)["completion"])
-
-
+response = json.loads(response_raw['body'].read())['content'][0]['text']
+print(response)
