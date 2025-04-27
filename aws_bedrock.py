@@ -9,6 +9,10 @@
 # For the resouce, specify ARN "arn:aws:kendra:us-east-1:<your account number>:index/<your kendra index like 1e6c2e5a>". 
 # Name you policy.  Attach this policy to your kendra role.
 
+# When uploading files to s3, attach the metadata info like s3_document_id=doc001, author=xxx, category=ccc and etc.  
+# When synchronizing s3 with Kendra, under s3 field mapping, add these s3_document_id, author, category under s3_field_name, and insert authour, category under index_field_name column.
+# Finally, when you query, you can filter by authour, category, a3_document_id.  
+
 import boto3
 import json
 
