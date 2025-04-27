@@ -2,6 +2,13 @@
 # https://docs.llamaindex.ai/en/stable/examples/index_structs/knowledge_graph/NeptuneDatabaseKGIndexDemo/
 # https://dev.classmethod.jp/articles/first-3steps-bedrock-claude-boto3/
 
+# When you setup Kendra for RAG, you will create a new role or choose existing role that has Kendra access policy, but you also need BatchPutDocument.
+# You do not have this policy, so will need to create one.
+# Go to IAM, click policy, click "create policy".
+# Choose Kendra for service.  Under "Write" choose "BatchPutDocument".  
+# For the resouce, specify ARN "arn:aws:kendra:us-east-1:<your account number>:index/<your kendra index like 1e6c2e5a>". 
+# Name you policy.  Attach this policy to your kendra role.
+
 import boto3
 import json
 
