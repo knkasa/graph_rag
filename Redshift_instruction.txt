@@ -1,0 +1,26 @@
+Creating table in Redshift.
+1. Open Redshift in AWS, click "create workgroup".
+2. check "Customize admin user credential" and pick user/password instead of IAM.
+3. Create new role if not created. AmazonRedshift-CommandsAccessRole
+4. Once created, click "Query Editor v2". Use user/password to to connect the workgroup.
+5. Create table using sql, or use csv from s3.
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    salary DECIMAL(10,2)
+    );
+
+6. Insert records.
+INSERT INTO employees (id, name, department, salary)
+VALUES 
+(1, 'Alice', 'Engineering', 85000.00),
+(2, 'Bob', 'HR', 60000.00),
+(3, 'John', 'IT', 79000.00);
+
+7. Go to AWS Secret manager, add user/password.
+8. Open Bedrock, click Knowledge Base, choose Structured data, follow instruction.
+9. Instead of IAM, provide the Secret manager.
+11. Add RedshiftDataFullAccess, or RedshiftFullAccess to the Bedrock role you used here.
+11. Once setup is complete, click sync.
+
