@@ -22,5 +22,5 @@ VALUES
 8. Open Bedrock, click Knowledge Base, choose Structured data, follow instruction.
 9. Instead of IAM, provide the Secret manager.
 11. Add RedshiftDataFullAccess, or RedshiftFullAccess to the Bedrock role you used here.
-11. Once setup is complete, click sync.
-
+12. Once setup is complete, click sync.
+(note: when you delete redshift, make sure to delete both workgroup & name space)
