@@ -2,7 +2,7 @@ Creating table in Redshift.
 1. Open Redshift in AWS, click "create workgroup".
 2. check "Customize admin user credential" and pick user/password instead of IAM.
 3. Create new role if not created. AmazonRedshift-CommandsAccessRole
-4. Once created, click "Query Editor v2" from left pane. Use user/password to to connect the workgroup.
+4. Once created, click "Query Editor v2" from left pane. Click the workgroup to login, use user/password to to connect.
 5. Create table using sql, or use csv from s3.
 CREATE TABLE employees (
     id INT PRIMARY KEY,
